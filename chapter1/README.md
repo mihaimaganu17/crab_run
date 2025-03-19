@@ -3,6 +3,15 @@ Touching on 2 models of parallelism:
 1. Concurrent memory operations: multiple CPUs contend to manipulate a shared, addressable memory.
 2. Data parallelism: CPU is able to operate with a single or multiple instructions on multiple words
 at a time concurrently.
+Empirical methods such as:
+- measruement
+- examination of assembly code
+- experimentaion with alternative implementations
+will be combined with the abstract model of the machines, focusing on:
+- total cache layers
+- cache sizes
+- bus speeds
+- microcode versions
 
 ## Memory
 PRAM -> Abstract machine, similar to RAM but designed for parallel computing
@@ -29,3 +38,8 @@ With data being transferred 64 bits at a time, DDR SDRAM gives a transfer rate (
 (memory bus clock rate) × 2 (for dual rate) × 64 (number of bits transferred) / 8 (number of bits/byte).
 Thus, with a bus frequency of 100 MHz, DDR SDRAM gives a maximum transfer rate of 1600 MB/s.
 
+## CPU
+The CPU is the device:
+- decodes a stream of instruction
+- executes / interprets each instruction in that stream
+- manipulates storage and other devices connected to it in the process.

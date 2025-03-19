@@ -3,7 +3,15 @@
 ## Prerequisites
 ## Docker
 ### MacOS
-Install `Docker Desktop` from [docker.com](https://docs.docker.com/desktop/setup/install/mac-install/)
+1. Install `Docker Desktop` from [docker.com](https://docs.docker.com/desktop/setup/install/mac-install/)
+2. Build the docker image
+```
+make debian-build
+```
+3. Run it
+```
+make debian-run
+```
 ## Valgrind
 ### MacOS
 -> DOES NOT WORK FOR MODERN MACOS -> USE DOCKER

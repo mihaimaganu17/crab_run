@@ -1,1 +1,20 @@
 FROM debian
+
+# Update system
+RUN apt-get update
+
+# Install Rust
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+# Instal Python
+RUN apt-get install -y python3
+# Install pip
+RUN apt-get install -y python3-pip
+# Intall valgring and debuggin tools
+RUN apt-get install -y valgrind gdb lldb
+
+# Add a new user
+RUN useradd -ms /bin/bash crab
+
+USER crab
+WORKDIR /home/crab

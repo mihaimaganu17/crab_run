@@ -1,0 +1,233 @@
+desc: (none)
+cmd: target/x86_64-unknown-linux-gnu/debug/hello_world
+time_unit: i
+#-----------
+snapshot=0
+#-----------
+time=0
+mem_heap_B=0
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=1
+#-----------
+time=199996
+mem_heap_B=472
+mem_heap_extra_B=16
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=2
+#-----------
+time=200530
+mem_heap_B=592
+mem_heap_extra_B=32
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=3
+#-----------
+time=200697
+mem_heap_B=1616
+mem_heap_extra_B=40
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=4
+#-----------
+time=201640
+mem_heap_B=1736
+mem_heap_extra_B=32
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=5
+#-----------
+time=385122
+mem_heap_B=1736
+mem_heap_extra_B=32
+mem_stacks_B=0
+heap_tree=peak
+n4: 1736 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 1024 0x48E58CB: _IO_file_doallocate (filedoalloc.c:101)
+  n1: 1024 0x48F309F: _IO_doallocbuf (genops.c:347)
+   n1: 1024 0x48F309F: _IO_doallocbuf (genops.c:342)
+    n1: 1024 0x48F2203: _IO_file_underflow@@GLIBC_2.2.5 (fileops.c:485)
+     n1: 1024 0x48E6E77: getdelim (iogetdelim.c:73)
+      n1: 1024 0x48FA784: pthread_getattr_np@@GLIBC_2.32 (pthread_getattr_np.c:122)
+       n1: 1024 0x12A841: get_stack_start (stack_overflow.rs:327)
+        n1: 1024 0x12A841: stack_start_aligned (stack_overflow.rs:341)
+         n1: 1024 0x12A841: install_main_guard_linux (stack_overflow.rs:390)
+          n1: 1024 0x12A841: install_main_guard (stack_overflow.rs:365)
+           n1: 1024 0x12A841: init (stack_overflow.rs:131)
+            n1: 1024 0x12A841: init (mod.rs:58)
+             n1: 1024 0x12A841: init (rt.rs:102)
+              n1: 1024 0x12A841: {closure#0} (rt.rs:172)
+               n1: 1024 0x12A841: do_call<std::rt::lang_start_internal::{closure_env#0}, ()> (panicking.rs:584)
+                n1: 1024 0x12A841: try<(), std::rt::lang_start_internal::{closure_env#0}> (panicking.rs:547)
+                 n1: 1024 0x12A841: catch_unwind<std::rt::lang_start_internal::{closure_env#0}, ()> (panic.rs:358)
+                  n1: 1024 0x12A841: std::rt::lang_start_internal (rt.rs:172)
+                   n1: 1024 0x10F9D9: std::rt::lang_start (rt.rs:194)
+                    n0: 1024 0x10FB4D: main (in /home/crab/chapter1/target/x86_64-unknown-linux-gnu/debug/hello_world)
+ n1: 472 0x48E61FA: __fopen_internal (iofopen.c:65)
+  n1: 472 0x48FA652: pthread_getattr_np@@GLIBC_2.32 (pthread_getattr_np.c:85)
+   n1: 472 0x12A841: get_stack_start (stack_overflow.rs:327)
+    n1: 472 0x12A841: stack_start_aligned (stack_overflow.rs:341)
+     n1: 472 0x12A841: install_main_guard_linux (stack_overflow.rs:390)
+      n1: 472 0x12A841: install_main_guard (stack_overflow.rs:365)
+       n1: 472 0x12A841: init (stack_overflow.rs:131)
+        n1: 472 0x12A841: init (mod.rs:58)
+         n1: 472 0x12A841: init (rt.rs:102)
+          n1: 472 0x12A841: {closure#0} (rt.rs:172)
+           n1: 472 0x12A841: do_call<std::rt::lang_start_internal::{closure_env#0}, ()> (panicking.rs:584)
+            n1: 472 0x12A841: try<(), std::rt::lang_start_internal::{closure_env#0}> (panicking.rs:547)
+             n1: 472 0x12A841: catch_unwind<std::rt::lang_start_internal::{closure_env#0}, ()> (panic.rs:358)
+              n1: 472 0x12A841: std::rt::lang_start_internal (rt.rs:172)
+               n1: 472 0x10F9D9: std::rt::lang_start (rt.rs:194)
+                n0: 472 0x10FB4D: main (in /home/crab/chapter1/target/x86_64-unknown-linux-gnu/debug/hello_world)
+ n1: 240 0x48E6CFC: getdelim (iogetdelim.c:102)
+  n1: 240 0x48FA784: pthread_getattr_np@@GLIBC_2.32 (pthread_getattr_np.c:122)
+   n1: 240 0x12A841: get_stack_start (stack_overflow.rs:327)
+    n1: 240 0x12A841: stack_start_aligned (stack_overflow.rs:341)
+     n1: 240 0x12A841: install_main_guard_linux (stack_overflow.rs:390)
+      n1: 240 0x12A841: install_main_guard (stack_overflow.rs:365)
+       n1: 240 0x12A841: init (stack_overflow.rs:131)
+        n1: 240 0x12A841: init (mod.rs:58)
+         n1: 240 0x12A841: init (rt.rs:102)
+          n1: 240 0x12A841: {closure#0} (rt.rs:172)
+           n1: 240 0x12A841: do_call<std::rt::lang_start_internal::{closure_env#0}, ()> (panicking.rs:584)
+            n1: 240 0x12A841: try<(), std::rt::lang_start_internal::{closure_env#0}> (panicking.rs:547)
+             n1: 240 0x12A841: catch_unwind<std::rt::lang_start_internal::{closure_env#0}, ()> (panic.rs:358)
+              n1: 240 0x12A841: std::rt::lang_start_internal (rt.rs:172)
+               n1: 240 0x10F9D9: std::rt::lang_start (rt.rs:194)
+                n0: 240 0x10FB4D: main (in /home/crab/chapter1/target/x86_64-unknown-linux-gnu/debug/hello_world)
+ n0: 0 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=6
+#-----------
+time=385122
+mem_heap_B=1496
+mem_heap_extra_B=24
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=7
+#-----------
+time=385322
+mem_heap_B=472
+mem_heap_extra_B=16
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=8
+#-----------
+time=385445
+mem_heap_B=0
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=9
+#-----------
+time=386173
+mem_heap_B=32
+mem_heap_extra_B=8
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=10
+#-----------
+time=386956
+mem_heap_B=184
+mem_heap_extra_B=24
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=11
+#-----------
+time=387019
+mem_heap_B=216
+mem_heap_extra_B=32
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=12
+#-----------
+time=387080
+mem_heap_B=184
+mem_heap_extra_B=24
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=13
+#-----------
+time=387153
+mem_heap_B=152
+mem_heap_extra_B=16
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=14
+#-----------
+time=387181
+mem_heap_B=0
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=15
+#-----------
+time=388034
+mem_heap_B=1024
+mem_heap_extra_B=8
+mem_stacks_B=0
+heap_tree=detailed
+n2: 1024 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 1024 0x12F041: alloc (alloc.rs:96)
+  n1: 1024 0x12F041: alloc_impl (alloc.rs:192)
+   n1: 1024 0x12F041: allocate (alloc.rs:254)
+    n1: 1024 0x12F041: try_allocate_in<alloc::alloc::Global> (raw_vec.rs:474)
+     n1: 1024 0x12F041: with_capacity_in<alloc::alloc::Global> (raw_vec.rs:420)
+      n1: 1024 0x12F041: with_capacity_in<u8, alloc::alloc::Global> (raw_vec.rs:192)
+       n1: 1024 0x12F041: with_capacity_in<u8, alloc::alloc::Global> (mod.rs:803)
+        n1: 1024 0x12F041: with_capacity<u8> (mod.rs:483)
+         n1: 1024 0x12F041: with_capacity<std::io::stdio::StdoutRaw> (bufwriter.rs:122)
+          n1: 1024 0x12F041: with_capacity<std::io::stdio::StdoutRaw> (linewriter.rs:110)
+           n1: 1024 0x12F041: new<std::io::stdio::StdoutRaw> (linewriter.rs:90)
+            n1: 1024 0x12F041: {closure#0} (stdio.rs:677)
+             n1: 1024 0x12F041: {closure#0}<std::sync::reentrant_lock::ReentrantLock<core::cell::RefCell<std::io::buffered::linewriter::LineWriter<std::io::stdio::StdoutRaw>>>, std::io::stdio::stdout::{closure_env#0}> (once_lock.rs:305)
+              n1: 1024 0x12F041: {closure#0}<std::sync::reentrant_lock::ReentrantLock<core::cell::RefCell<std::io::buffered::linewriter::LineWriter<std::io::stdio::StdoutRaw>>>, std::sync::once_lock::{impl#0}::get_or_init::{closure_env#0}<std::sync::reentrant_lock::ReentrantLock<core::cell::RefCell<std::io::buffered::linewriter::LineWriter<std::io::stdio::StdoutRaw>>>, std::io::stdio::stdout::{closure_env#0}>, !> (once_lock.rs:513)
+               n1: 1024 0x12F041: std::sync::poison::once::Once::call_once_force::{{closure}} (once.rs:217)
+                n1: 1024 0x10EBC3: std::sys::sync::once::futex::Once::call (futex.rs:176)
+                 n1: 1024 0x10E6F1: call_once_force<std::sync::once_lock::{impl#0}::initialize::{closure_env#0}<std::sync::reentrant_lock::ReentrantLock<core::cell::RefCell<std::io::buffered::linewriter::LineWriter<std::io::stdio::StdoutRaw>>>, std::sync::once_lock::{impl#0}::get_or_init::{closure_env#0}<std::sync::reentrant_lock::ReentrantLock<core::cell::RefCell<std::io::buffered::linewriter::LineWriter<std::io::stdio::StdoutRaw>>>, std::io::stdio::stdout::{closure_env#0}>, !>> (once.rs:217)
+                  n1: 1024 0x10E6F1: std::sync::once_lock::OnceLock<T>::initialize (once_lock.rs:512)
+                   n1: 1024 0x12C653: get_or_try_init<std::sync::reentrant_lock::ReentrantLock<core::cell::RefCell<std::io::buffered::linewriter::LineWriter<std::io::stdio::StdoutRaw>>>, std::sync::once_lock::{impl#0}::get_or_init::{closure_env#0}<std::sync::reentrant_lock::ReentrantLock<core::cell::RefCell<std::io::buffered::linewriter::LineWriter<std::io::stdio::StdoutRaw>>>, std::io::stdio::stdout::{closure_env#0}>, !> (once_lock.rs:391)
+                    n1: 1024 0x12C653: get_or_init<std::sync::reentrant_lock::ReentrantLock<core::cell::RefCell<std::io::buffered::linewriter::LineWriter<std::io::stdio::StdoutRaw>>>, std::io::stdio::stdout::{closure_env#0}> (once_lock.rs:305)
+                     n1: 1024 0x12C653: stdout (stdio.rs:677)
+                      n1: 1024 0x12C653: print_to<std::io::stdio::Stdout> (stdio.rs:1122)
+                       n1: 1024 0x12C653: std::io::stdio::_print (stdio.rs:1233)
+                        n1: 1024 0x10FB1F: hello_world::main (main.rs:2)
+                         n1: 1024 0x10FAAA: core::ops::function::FnOnce::call_once (function.rs:250)
+                          n1: 1024 0x10FA2D: std::sys::backtrace::__rust_begin_short_backtrace (backtrace.rs:152)
+                           n1: 1024 0x10FA00: std::rt::lang_start::{{closure}} (rt.rs:195)
+                            n1: 1024 0x12AAD6: call_once<(), (dyn core::ops::function::Fn<(), Output=i32> + core::marker::Sync + core::panic::unwind_safe::RefUnwindSafe)> (function.rs:284)
+                             n1: 1024 0x12AAD6: do_call<&(dyn core::ops::function::Fn<(), Output=i32> + core::marker::Sync + core::panic::unwind_safe::RefUnwindSafe), i32> (panicking.rs:584)
+                              n1: 1024 0x12AAD6: try<i32, &(dyn core::ops::function::Fn<(), Output=i32> + core::marker::Sync + core::panic::unwind_safe::RefUnwindSafe)> (panicking.rs:547)
+                               n1: 1024 0x12AAD6: catch_unwind<&(dyn core::ops::function::Fn<(), Output=i32> + core::marker::Sync + core::panic::unwind_safe::RefUnwindSafe), i32> (panic.rs:358)
+                                n1: 1024 0x12AAD6: {closure#1} (rt.rs:174)
+                                 n1: 1024 0x12AAD6: do_call<std::rt::lang_start_internal::{closure_env#1}, isize> (panicking.rs:584)
+                                  n1: 1024 0x12AAD6: try<isize, std::rt::lang_start_internal::{closure_env#1}> (panicking.rs:547)
+                                   n1: 1024 0x12AAD6: catch_unwind<std::rt::lang_start_internal::{closure_env#1}, isize> (panic.rs:358)
+                                    n1: 1024 0x12AAD6: std::rt::lang_start_internal (rt.rs:174)
+                                     n1: 1024 0x10F9D9: std::rt::lang_start (rt.rs:194)
+                                      n0: 1024 0x10FB4D: main (in /home/crab/chapter1/target/x86_64-unknown-linux-gnu/debug/hello_world)
+ n0: 0 in 7 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=16
+#-----------
+time=388520
+mem_heap_B=0
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty

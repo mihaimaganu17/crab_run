@@ -11,6 +11,8 @@ RUN apt-get install -y python3-pip
 RUN apt-get install -y valgrind gdb lldb
 # Install curl
 RUN apt-get install -y curl
+# Install cross-compilation linker
+RUN apt-get install -y gcc-arm-linux-gnueabihf
 
 # Add a new user
 RUN useradd -ms /bin/bash crab
@@ -19,5 +21,7 @@ USER crab
 
 # Install Rust
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+# Install Rust toolchains
+RUN rustup target add stable-armv7-unknown-linux-gnueabihf
 
 WORKDIR /home/crab

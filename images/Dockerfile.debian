@@ -21,7 +21,7 @@ USER crab
 
 # Install Rust
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-# Install Rust toolchains
-RUN rustup target add stable-armv7-unknown-linux-gnueabihf
+# Export the cargo binaries path, such that we find `rustup`
+ENV PATH="/root/.cargo/bin:${PATH}"
 
 WORKDIR /home/crab

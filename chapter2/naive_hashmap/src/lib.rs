@@ -1,5 +1,5 @@
 use std::{
-    hash::Hash,
+    hash::{Hash, Hasher, BuildHasher},
     collections::hash_map::RandomState,
 };
 
@@ -25,6 +25,15 @@ where
             hash_builder: RandomState::new(),
             data: Vec::new(),
         }
+    }
+
+    pub fn make_hash<S: BuildHasher>(value: &K, hash_builder: S) -> u64 {
+        // Create a new hasher
+        let mut hasher = hash_builder.build_hasher();
+        // Hash the given value
+        value.hash(&mut hasher);
+        // Finish and return the hash
+        hasher.finish()
     }
 }
 

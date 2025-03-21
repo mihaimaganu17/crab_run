@@ -21,6 +21,7 @@ debian-run-amd64:
 		-it --rm \
 		--platform linux/amd64 \
 		-v ./chapter1:/home/crab/chapter1 \
+		-v ./chapter2:/home/crab/chapter2 \
 		debian_crab_amd64
 
 IMAGES = $(shell docker images -q)

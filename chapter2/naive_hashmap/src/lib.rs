@@ -37,6 +37,20 @@ where
     }
 }
 
+impl<K, V, S> HashMap<K, V, S>
+where
+    K: Eq + Hash,
+    V: std::fmt::Debug,
+    S: BuildHasher,
+{
+    pub fn with_hasher(hash_builder: S) -> HashMap<K, V, S> {
+        Self {
+            hash_builder,
+            data: Vec::new(),
+        }
+    }
+}
+
 #[cfg(test)]
 mod tests {
 }

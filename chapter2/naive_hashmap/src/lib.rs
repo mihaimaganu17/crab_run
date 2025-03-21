@@ -1,6 +1,6 @@
 use std::{
-    hash::{Hash, Hasher, BuildHasher},
     collections::hash_map::RandomState,
+    hash::{BuildHasher, Hash},
 };
 
 #[derive(Default)]
@@ -18,7 +18,7 @@ where
 impl<K, V> HashMap<K, V, RandomState>
 where
     K: Eq + Hash,
-    V: std::fmt::Debug
+    V: std::fmt::Debug,
 {
     pub fn new() -> HashMap<K, V> {
         Self {
@@ -29,12 +29,15 @@ where
 }
 
 pub fn make_hash<V: Hash, S: BuildHasher>(value: &V, hash_builder: &S) -> u64 {
+    hash_builder.hash_one(value)
+    /*
     // Create a new hasher
     let mut hasher = hash_builder.build_hasher();
     // Hash the given value
     value.hash(&mut hasher);
     // Finish and return the hash
     hasher.finish()
+    */
 }
 
 impl<K, V, S> HashMap<K, V, S>
@@ -58,9 +61,9 @@ where
         // Compute the hash for the entry
         let wanted_hash = make_hash(&key, &self.hash_builder);
 
-        for (hash, key, value) in self.data.iter() {
+        for (hash, _key, value) in self.data.iter() {
             if &wanted_hash == hash {
-                return Some(value)
+                return Some(value);
             }
         }
         None
@@ -97,11 +100,10 @@ where
 
         // If we reached this point, we have gone through all the map's data and could not find
         // a spot to insert the element, so we push it at the end
-        self.data.push((hash,key,value));
+        self.data.push((hash, key, value));
         None
     }
 }
 
 #[cfg(test)]
-mod tests {
-}
+mod tests {}

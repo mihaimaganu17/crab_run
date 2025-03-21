@@ -50,6 +50,22 @@ where
         }
     }
 
+    pub fn get<Q>(&mut self, key: &Q) -> Option<&V>
+    where
+        K: std::borrow::Borrow<V>,
+        Q: Hash + Eq,
+    {
+        // Compute the hash for the entry
+        let wanted_hash = make_hash(&key, &self.hash_builder);
+
+        for (hash, key, value) in self.data.iter() {
+            if &wanted_hash == hash {
+                return Some(value)
+            }
+        }
+        None
+    }
+
     pub fn insert(&mut self, key: K, value: V) -> Option<V> {
         // Compute the hash for the entry
         let hash = make_hash(&key, &self.hash_builder);

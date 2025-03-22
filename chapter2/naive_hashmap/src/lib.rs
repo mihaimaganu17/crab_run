@@ -107,7 +107,7 @@ where
 
 #[cfg(test)]
 mod tests {
-    use quickcheck::{QuickCheck, TestResult};
+    use quickcheck::{QuickCheck, TestResult, Arbitrary, Gen};
     use super::HashMap;
 
     #[test]
@@ -125,17 +125,21 @@ mod tests {
         QuickCheck::new().quickcheck(property as fn(u16, u16) -> TestResult);
     }
 
-    #[test]
-    fn get_what_you_give_macro() {
-        quickcheck::quickcheck! {
-            fn prop(key: u16, value: u16) -> TestResult {
-                let mut system_under_test = HashMap::new();
+    #[derive(Clone)]
+    enum Action<T: Arbitrary> {
+        Insert(T, u16),
+        Lookup(T),
+    }
 
-                assert_eq!(None, system_under_test.get(&key));
-                assert_eq!(None, system_under_test.insert(key, value));
-                assert_eq!(Some(&value), system_under_test.get(&key));
+    impl<T: Arbitrary> Arbitrary for Action<T> {
+        // Required method
+        fn arbitrary<G: Gen>(g: &mut G) -> Self {
+            // Generate a random number
+            let choice = g.gen_range(0, 100);
 
-                TestResult::passed()
+            match choice {
+                0..50 => Self::Insert(T::arbitrary(g), u16::arbitrary(g)),
+                _ => Self::Lookup(T::arbitrary(g)),
             }
         }
     }

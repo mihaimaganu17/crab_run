@@ -107,8 +107,8 @@ where
 
 #[cfg(test)]
 mod tests {
-    use quickcheck::{QuickCheck, TestResult, Arbitrary, Gen};
     use super::HashMap;
+    use quickcheck::{Arbitrary, Gen, QuickCheck, TestResult};
 
     #[test]
     fn get_what_you_give() {
@@ -150,17 +150,18 @@ mod tests {
 
         fn property<T>(actions: Vec<Action<T>>) -> TestResult
         where
-            T: Arbitrary + Eq + Hash + Clone
+            T: Arbitrary + Eq + Hash + Clone,
         {
             let mut model = std::collections::HashMap::new();
             let mut sys_under_test = HashMap::new();
 
             for action in actions {
                 match action {
-                    Action::Insert(key, value) =>
-                        assert_eq!(model.insert(key.clone(), value), sys_under_test.insert(key.clone(), value)),
-                    Action::Lookup(key) =>
-                        assert_eq!(model.get(&key), sys_under_test.get(&key)),
+                    Action::Insert(key, value) => assert_eq!(
+                        model.insert(key.clone(), value),
+                        sys_under_test.insert(key.clone(), value)
+                    ),
+                    Action::Lookup(key) => assert_eq!(model.get(&key), sys_under_test.get(&key)),
                 }
             }
             TestResult::passed()

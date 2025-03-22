@@ -55,7 +55,7 @@ where
 
     pub fn get<Q>(&mut self, key: &Q) -> Option<&V>
     where
-        K: std::borrow::Borrow<V>,
+        K: std::borrow::Borrow<Q>,
         Q: Hash + Eq,
     {
         // Compute the hash for the entry
@@ -125,7 +125,7 @@ mod tests {
         QuickCheck::new().quickcheck(property as fn(u16, u16) -> TestResult);
     }
 
-    #[derive(Clone)]
+    #[derive(Clone, Debug)]
     enum Action<T: Arbitrary> {
         Insert(T, u16),
         Lookup(T),
@@ -142,5 +142,30 @@ mod tests {
                 _ => Self::Lookup(T::arbitrary(g)),
             }
         }
+    }
+
+    #[test]
+    fn sut_vs_std_hashmap() {
+        use crate::Hash;
+
+        fn property<T>(actions: Vec<Action<T>>) -> TestResult
+        where
+            T: Arbitrary + Eq + Hash + Clone
+        {
+            let mut model = std::collections::HashMap::new();
+            let mut sys_under_test = HashMap::new();
+
+            for action in actions {
+                match action {
+                    Action::Insert(key, value) =>
+                        assert_eq!(model.insert(key.clone(), value), sys_under_test.insert(key.clone(), value)),
+                    Action::Lookup(key) =>
+                        assert_eq!(model.get(&key), sys_under_test.get(&key)),
+                }
+            }
+            TestResult::passed()
+        }
+
+        QuickCheck::new().quickcheck(property as fn(Vec<Action<u8>>) -> TestResult);
     }
 }

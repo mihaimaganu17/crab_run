@@ -106,4 +106,37 @@ where
 }
 
 #[cfg(test)]
-mod tests {}
+mod tests {
+    use quickcheck::{QuickCheck, TestResult};
+    use super::HashMap;
+
+    #[test]
+    fn get_what_you_give() {
+        fn property(key: u16, value: u16) -> TestResult {
+            let mut system_under_test = HashMap::new();
+
+            assert_eq!(None, system_under_test.get(&key));
+            assert_eq!(None, system_under_test.insert(key, value));
+            assert_eq!(Some(&value), system_under_test.get(&key));
+
+            TestResult::passed()
+        }
+
+        QuickCheck::new().quickcheck(property as fn(u16, u16) -> TestResult);
+    }
+
+    #[test]
+    fn get_what_you_give_macro() {
+        quickcheck::quickcheck! {
+            fn prop(key: u16, value: u16) -> TestResult {
+                let mut system_under_test = HashMap::new();
+
+                assert_eq!(None, system_under_test.get(&key));
+                assert_eq!(None, system_under_test.insert(key, value));
+                assert_eq!(Some(&value), system_under_test.get(&key));
+
+                TestResult::passed()
+            }
+        }
+    }
+}

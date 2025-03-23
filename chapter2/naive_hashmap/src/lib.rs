@@ -56,7 +56,7 @@ where
     pub fn get<Q>(&mut self, key: &Q) -> Option<&V>
     where
         K: std::borrow::Borrow<Q>,
-        Q: Hash + Eq,
+        Q: Hash + Eq + ?Sized,
     {
         // Compute the hash for the entry
         let wanted_hash = make_hash(&key, &self.hash_builder);

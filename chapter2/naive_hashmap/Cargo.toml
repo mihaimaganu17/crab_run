@@ -3,6 +3,10 @@ name = "naive_hashmap"
 version = "0.1.0"
 edition = "2024"
 
+[[bench]]
+name = "naive"
+harness = false
+
 [[bin]]
 name = "naive_interpreter"
 doc = false

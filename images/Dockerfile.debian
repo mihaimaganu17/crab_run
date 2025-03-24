@@ -13,6 +13,8 @@ RUN apt-get install -y valgrind gdb lldb
 RUN apt-get install -y curl
 # Install cross-compilation linker
 RUN apt-get install -y gcc-arm-linux-gnueabihf
+# Install Python
+RUN apt-get install -y linux-perf
 
 # Add a new user
 RUN useradd -ms /bin/bash crab

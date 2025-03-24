@@ -1,5 +1,5 @@
+use rand::{Rng, SeedableRng, rngs::SmallRng};
 use std::collections::HashMap;
-use rand::{rngs::SmallRng, SeedableRng, Rng};
 
 fn main() {
     // SmallRng is Xoshiro256++. Insecure but fast
@@ -23,12 +23,10 @@ fn main() {
             } else {
                 insert_empty += 1;
             }
+        } else if hash_map.contains_key(&key) {
+            get_some += 1;
         } else {
-            if hash_map.get(&key).is_some() {
-                get_some += 1;
-            } else {
-                get_none += 1;
-            }
+            get_none += 1;
         }
     }
 

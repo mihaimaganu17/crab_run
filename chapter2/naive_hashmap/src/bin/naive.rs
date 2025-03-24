@@ -1,5 +1,5 @@
 use naive_hashmap::HashMap;
-use rand::{rngs::SmallRng, SeedableRng, Rng};
+use rand::{Rng, SeedableRng, rngs::SmallRng};
 
 fn main() {
     // SmallRng is Xoshiro256++. Insecure but fast
@@ -23,12 +23,10 @@ fn main() {
             } else {
                 insert_empty += 1;
             }
+        } else if hash_map.get(&key).is_some() {
+            get_some += 1;
         } else {
-            if hash_map.get(&key).is_some() {
-                get_some += 1;
-            } else {
-                get_none += 1;
-            }
+            get_none += 1;
         }
     }
 

@@ -1,5 +1,5 @@
-use rand::{rngs::SmallRng, SeedableRng, Rng};
-use criterion::{Criterion, criterion_main, criterion_group};
+use criterion::{Criterion, criterion_group, criterion_main};
+use rand::{Rng, SeedableRng, rngs::SmallRng};
 
 fn insert_and_lookup_naive(mut count: u64) {
     // SmallRng is Xoshiro256++. Insecure but fast
@@ -59,7 +59,7 @@ macro_rules! insert_lookup {
             // Consume the benchmakr group and generate the reports.
             group.finish();
         }
-    }
+    };
 }
 
 insert_lookup!(insert_lookup_100000, &100_000);
@@ -69,7 +69,7 @@ insert_lookup!(insert_lookup_100, &100);
 insert_lookup!(insert_lookup_10, &10);
 insert_lookup!(insert_lookup_1, &1);
 
-criterion_group!{
+criterion_group! {
     name = insert_lookup_benches;
     config = Criterion::default();
     targets = insert_lookup_100000, insert_lookup_10000, insert_lookup_1000, insert_lookup_100,

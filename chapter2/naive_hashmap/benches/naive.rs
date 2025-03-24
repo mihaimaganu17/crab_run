@@ -1,4 +1,5 @@
 use rand::{rngs::SmallRng, SeedableRng, Rng};
+use criterion::{Criterion, criterion_main, criterion_group};
 
 fn insert_and_lookup_naive(mut count: u64) {
     // SmallRng is Xoshiro256++. Insecure but fast
@@ -44,13 +45,17 @@ macro_rules! insert_lookup {
     // Creates a function that compares the `naive` and `standard` `HashMap` implementations using
     // a criterion group and given parameters
     ($bench_fn:ident, $input:expr) => {
-        fn $bench_fn(c: &mut criterion::Criterion) {
+        fn $bench_fn(c: &mut Criterion) {
             // Create a new criterion group
             let mut group = c.benchmark_group(format!("HashMap/{}", $input));
             // Add the naive function
-            group.bench_with_input("naive", $input, |_b, count| insert_and_lookup_naive(*count));
+            group.bench_with_input("naive", $input, |b, count| {
+                b.iter(|| insert_and_lookup_naive(*count))
+            });
             // Add the standard function
-            group.bench_with_input("std", $input, |_b, count| insert_and_lookup_standard(*count));
+            group.bench_with_input("std", $input, |b, count| {
+                b.iter(|| insert_and_lookup_standard(*count))
+            });
             // Consume the benchmakr group and generate the reports.
             group.finish();
         }
@@ -64,4 +69,11 @@ insert_lookup!(insert_lookup_100, &100);
 insert_lookup!(insert_lookup_10, &10);
 insert_lookup!(insert_lookup_1, &1);
 
-fn main() {}
+criterion_group!{
+    name = insert_lookup_benches;
+    config = Criterion::default();
+    targets = insert_lookup_100000, insert_lookup_10000, insert_lookup_1000, insert_lookup_100,
+                insert_lookup_10, insert_lookup_1,
+}
+
+criterion_main!(insert_lookup_benches);

@@ -40,4 +40,28 @@ fn insert_and_lookup_standard(mut count: u64) {
     }
 }
 
+macro_rules! insert_lookup {
+    // Creates a function that compares the `naive` and `standard` `HashMap` implementations using
+    // a criterion group and given parameters
+    ($bench_fn:ident, $input:expr) => {
+        fn $bench_fn(c: &mut criterion::Criterion) {
+            // Create a new criterion group
+            let mut group = c.benchmark_group(format!("HashMap/{}", $input));
+            // Add the naive function
+            group.bench_with_input("naive", $input, |_b, count| insert_and_lookup_naive(*count));
+            // Add the standard function
+            group.bench_with_input("std", $input, |_b, count| insert_and_lookup_standard(*count));
+            // Consume the benchmakr group and generate the reports.
+            group.finish();
+        }
+    }
+}
+
+insert_lookup!(insert_lookup_100000, &100_000);
+insert_lookup!(insert_lookup_10000, &10_000);
+insert_lookup!(insert_lookup_1000, &1000);
+insert_lookup!(insert_lookup_100, &100);
+insert_lookup!(insert_lookup_10, &10);
+insert_lookup!(insert_lookup_1, &1);
+
 fn main() {}

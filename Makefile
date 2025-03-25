@@ -30,4 +30,7 @@ IMAGES = $(shell docker images -q)
 docker-clean-all:
 	docker system prune -f && docker rmi $(IMAGES)
 
+fuzz_hashmap:
+	cargo afl fuzz -i resources/in/ -o resources/out/ target/release/specialized_interpreter
+
 

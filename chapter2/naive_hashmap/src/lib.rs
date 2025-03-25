@@ -113,15 +113,22 @@ pub struct HashMapU8<V: fmt::Debug> {
 
 impl<V: fmt::Debug> HashMapU8<V> {
     pub fn new() -> HashMapU8<V> {
-        let data = unsafe {
+        let data = {
             // Create an uninitiliazed array of `MaybeUninit`.
             let mut data: [MaybeUninit<Option<V>>; 256] = [const { MaybeUninit::uninit() }; 256];
             // Populate the data
             for elem in data.iter_mut() {
                 elem.write(None);
             }
+
             // Everything is initialized. Transmute the array to the initialized type.
-            unsafe { mem::transmute::<_, [Option<V>; 256]>(data) }
+            //unsafe { mem::transmute::<_, [Option<V>; 256]>(data) }
+            let ptr = &mut data as *mut _ as *mut [Option<V>; 256];
+            // Creates a bitwise copy of the value
+            let res = unsafe { ptr.read() };
+            // Takes ownership and forgets about the value without running its desctructor.
+            mem::forget(data);
+            res
         };
         HashMapU8 { data }
     }

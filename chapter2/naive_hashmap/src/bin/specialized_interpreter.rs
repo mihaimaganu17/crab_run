@@ -15,7 +15,7 @@ fn main() {
             Some("LOOKUP") => {
                 // If we have a key
                 if let Some(key) = cmd.next() {
-                    if let Ok(key_u8) = u8::from_str_radix(key, 10) {
+                    if let Ok(key_u8) = key.parse::<u8>() {
                         // Get the key
                         let _ = hash_map.get(&key_u8);
                     } else {
@@ -28,7 +28,7 @@ fn main() {
             Some("INSERT") => {
                 // If we have a key and a value
                 if let (Some(key), Some(value)) = (cmd.next(), cmd.next()) {
-                    if let Ok(key_u8) = u8::from_str_radix(key, 10) {
+                    if let Ok(key_u8) = key.parse::<u8>() {
                         // Insert the value and key
                         let _ = hash_map.insert(key_u8, value.to_string());
                     }

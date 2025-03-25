@@ -1,6 +1,6 @@
 use criterion::{Criterion, criterion_group, criterion_main};
-use rand::{Rng, SeedableRng, rngs::SmallRng};
 use naive_hashmap::HashMapU8;
+use rand::{Rng, SeedableRng, rngs::SmallRng};
 use std::collections::HashMap;
 
 fn insert_and_lookup_specialized(mut count: u64) -> HashMapU8<u32> {

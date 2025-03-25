@@ -1,7 +1,7 @@
 use std::{
     collections::hash_map::RandomState,
-    hash::{BuildHasher, Hash},
     fmt,
+    hash::{BuildHasher, Hash},
     mem::{self, MaybeUninit},
 };
 
@@ -111,6 +111,12 @@ pub struct HashMapU8<V: fmt::Debug> {
     data: [Option<V>; 256],
 }
 
+impl<V: fmt::Debug> Default for HashMapU8<V> {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl<V: fmt::Debug> HashMapU8<V> {
     pub fn new() -> HashMapU8<V> {
         let data = {
@@ -125,10 +131,7 @@ impl<V: fmt::Debug> HashMapU8<V> {
             //unsafe { mem::transmute::<_, [Option<V>; 256]>(data) }
             let ptr = &mut data as *mut _ as *mut [Option<V>; 256];
             // Creates a bitwise copy of the value
-            let res = unsafe { ptr.read() };
-            // Takes ownership and forgets about the value without running its desctructor.
-            mem::forget(data);
-            res
+            unsafe { ptr.read() }
         };
         HashMapU8 { data }
     }

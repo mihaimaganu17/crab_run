@@ -7,6 +7,10 @@ edition = "2024"
 name = "naive"
 harness = false
 
+[[bench]]
+name = "specialized"
+harness = false
+
 [[bin]]
 name = "naive_interpreter"
 doc = false

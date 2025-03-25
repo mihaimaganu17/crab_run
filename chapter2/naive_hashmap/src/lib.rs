@@ -132,6 +132,14 @@ impl<V: fmt::Debug> HashMapU8<V> {
         };
         HashMapU8 { data }
     }
+
+    pub fn get(&self, key: &u8) -> Option<&V> {
+        self.data[*key as usize].as_ref()
+    }
+
+    pub fn insert(&mut self, key: u8, value: V) -> Option<V> {
+        mem::replace(&mut self.data[key as usize], Some(value))
+    }
 }
 
 #[cfg(test)]

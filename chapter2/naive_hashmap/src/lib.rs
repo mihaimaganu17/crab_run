@@ -1,6 +1,8 @@
 use std::{
     collections::hash_map::RandomState,
     hash::{BuildHasher, Hash},
+    fmt,
+    mem::{self, MaybeUninit},
 };
 
 #[derive(Default)]
@@ -102,6 +104,26 @@ where
         // a spot to insert the element, so we push it at the end
         self.data.push((hash, key, value));
         None
+    }
+}
+
+pub struct HashMapU8<V: fmt::Debug> {
+    data: [Option<V>; 256],
+}
+
+impl<V: fmt::Debug> HashMapU8<V> {
+    pub fn new() -> HashMapU8<V> {
+        let data = unsafe {
+            // Create an uninitiliazed array of `MaybeUninit`.
+            let mut data: [MaybeUninit<Option<V>>; 256] = [const { MaybeUninit::uninit() }; 256];
+            // Populate the data
+            for elem in data.iter_mut() {
+                elem.write(None);
+            }
+            // Everything is initialized. Transmute the array to the initialized type.
+            unsafe { mem::transmute::<_, [Option<V>; 256]>(data) }
+        };
+        HashMapU8 { data }
     }
 }
 
